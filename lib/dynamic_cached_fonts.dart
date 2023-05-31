@@ -104,7 +104,6 @@ class DynamicCachedFonts {
           'url cannot be empty',
         ),
         urls = <String>[url],
-        _isFirebaseURL = false,
         _loaded = false;
 
   /// Allows dynamically loading fonts from the given list of url and caching them.
@@ -154,7 +153,6 @@ class DynamicCachedFonts {
           ),
           'url cannot be empty',
         ),
-        _isFirebaseURL = false,
         _loaded = false;
 
   /// Allows dynamically loading fonts from firebase storage with the given
@@ -199,7 +197,6 @@ class DynamicCachedFonts {
           'bucketUrl cannot be empty',
         ),
         urls = <String>[bucketUrl],
-        _isFirebaseURL = true,
         _loaded = false;
 
   /// Used to specify the download url(s) for the required font(s).
@@ -236,8 +233,6 @@ class DynamicCachedFonts {
   /// for [CacheManager].
   final Duration cacheStalePeriod;
 
-  /// Determines whether [url] is a firebase storage bucket url.
-  final bool _isFirebaseURL;
 
   /// Checks whether [load] has already been called.
   bool _loaded;
@@ -255,7 +250,7 @@ class DynamicCachedFonts {
 
     final List<String> downloadUrls = await Future.wait(
       urls.map(
-        (String url) async => _isFirebaseURL ? await Utils.handleUrl(url) : url,
+        (String url) async =>  url,
       ),
     );
 
@@ -326,7 +321,7 @@ class DynamicCachedFonts {
 
     final List<String> downloadUrls = await Future.wait(
       urls.map(
-        (String url) async => _isFirebaseURL ? await Utils.handleUrl(url) : url,
+        (String url) async => url,
       ),
     );
 
